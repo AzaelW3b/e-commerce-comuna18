@@ -60,11 +60,13 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress,
                 break
             case "email":
                 if (value.trim() === "") {
-                    newErrors = { ...newErrors, [name]: "Debes ingresar el correo" }
+                    newErrors = { ...newErrors, [name]: "Debes ingresar el correo" };
+                } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                    newErrors = { ...newErrors, [name]: "Debes ingresar un correo electrónico válido" };
                 } else {
-                    delete newErrors[name]
+                    delete newErrors[name];
                 }
-                break
+                break;
             case "phone":
                 if (value.trim() === "") {
                     newErrors = { ...newErrors, [name]: "Debes ingresare el télefono" }
@@ -371,7 +373,7 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress,
                     placeholder="Ingresa el email"
                     value={email}
                     onChange={(e) => handleBlurChange(e)}
-                    error={errorsAddress?.email ? true: false}
+                    error={errorsAddress?.email ? true : false}
 
                 />
                 {errorsAddress.email && (
