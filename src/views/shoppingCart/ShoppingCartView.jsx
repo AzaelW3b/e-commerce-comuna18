@@ -8,7 +8,8 @@ import {
     Typography,
     Stepper,
     Step,
-    StepLabel
+    StepLabel,
+    IconButton
 } from "@mui/material"
 import { useEffect, useState } from "react"
 import { formatCurrency } from "../../helpers/formatCurrency"
@@ -17,6 +18,7 @@ import useShoppingCart from '../../hooks/useShoppingCart'
 import ShoppingCartDeliveryAddress from './ShoppinCartDeliveryAddress'
 import ShoppingCartCardData from './ShoppingCartCardData'
 import ShoppingCartConfirmacion from './ShoppingCartConfirmation'
+import CloseIcon from '@mui/icons-material/Close'
 
 const ShoppingCartView = ({ setOpen, open }) => {
     const steps = ['Carrito de compras', 'Dirección de entrega', 'Datos de tarjeta']
@@ -179,7 +181,18 @@ const ShoppingCartView = ({ setOpen, open }) => {
             <DialogTitle id="alert-dialog-title">
                 <Typography sx={{ fontSize: "25px", fontWeight: "bold" }}>Detalles de compras</Typography>
             </DialogTitle>
-
+            <IconButton
+                aria-label="close"
+                onClick={handleClose}
+                sx={{
+                    position: 'absolute',
+                    right: 8,
+                    top: 8,
+                    color: (theme) => theme.palette.grey[500],
+                }}
+            >
+                <CloseIcon />
+            </IconButton>
             <DialogContent>
                 <Box sx={{ width: '100%' }}>
                     <Stepper sx={{

@@ -12,19 +12,25 @@ import ShoppingCart from '../../components/layout/ShoppingCart'
 import useShoppingCart from '../../hooks/useShoppingCart'
 import ShoppingCartView from '../shoppingCart/ShoppingCartView'
 import { useState } from 'react'
+import PokemonListDetail from './PokemonListDetail'
 
 const PokemonsList = () => {
     const [open, setOpen] = useState(false)
-    const { pokemons } = usePokemonsList()
+    const [openDetail, setOpenDetail] = useState(false)
+    const { pokemons, getPokemonDetailObject } = usePokemonsList()
     const { addPokemonShoppingCart } = useShoppingCart()
     const getPokemon = (pokemon) => {
         addPokemonShoppingCart(pokemon)
     }
+    const getPokemonDetail = (pokemon) => {
+        getPokemonDetailObject(pokemon?.id)
+        setOpenDetail(true)
+    }
     return (
-        <Box sx={{ margin: "0 auto", maxWidth: "1200px", width: "95%" }}>
+        <Box>
             <Box sx={{
                 display: "grid",
-                gridTemplateColumns:{ xs: "repeat(1,1fr)", md: "repeat(3,1fr)" },
+                gridTemplateColumns: { xs: "repeat(1,1fr)", md: "repeat(3,1fr)" },
                 gap: "20px"
             }}>
                 {
@@ -47,7 +53,7 @@ const PokemonsList = () => {
                             </CardContent>
                             <CardActions>
                                 <Button size="small" onClick={() => getPokemon(pokemon)}><ShoppingBasketIcon /></Button>
-                                <Button size="small">Detalle del pokémon</Button>
+                                <Button size="small" onClick={() => getPokemonDetail(pokemon)}>Detalle del pokémon</Button>
                             </CardActions>
                         </Card>
                     ))
@@ -60,6 +66,10 @@ const PokemonsList = () => {
                 setOpen={setOpen}
                 open={open}
 
+            />
+            <PokemonListDetail
+                setOpenDetail={setOpenDetail}
+                openDetail={openDetail}
             />
         </Box>
 

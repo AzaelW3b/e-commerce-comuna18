@@ -1,6 +1,8 @@
 import { Box, Typography } from '@mui/material'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import useShoppingCart from '../../hooks/useShoppingCart'
+import PropTypes from 'prop-types'
+
 const ShoppingCart = ({ setOpen }) => {
     const { shoppingCart } = useShoppingCart()
     return (
@@ -14,7 +16,7 @@ const ShoppingCart = ({ setOpen }) => {
             justifyContent: "center",
             backgroundColor: "#1565c0",
             position: "fixed",
-            bottom: "9px",
+            bottom: "109px",
             right: "26px",
             zIndex: "12",
         }}
@@ -30,4 +32,11 @@ const ShoppingCart = ({ setOpen }) => {
     )
 }
 
+
 export default ShoppingCart
+
+ShoppingCart.propTypes = {
+    setOpen: PropTypes.func.isRequired,
+
+
+}

@@ -6,19 +6,28 @@ const PokemonListContext = createContext()
 
 const PokemonListProvider = ({ children }) => {
     const [pokemons, setPokemons] = useState([])
+    const [pokemonObject, setPokemonObject] = useState(null)
+    const [currentPage, setCurrentPage] = useState(1)
+    const [perPage, setPerPage] = useState(20)
+    const [totalPages, setTotalPages] = useState(1)
 
     useEffect(() => {
-        getPokemons()
-    }, [])
-
-    const getPokemons = async () => {
-        try {
-            const { data } = await api.get('/pokemon?offset=0&limit=20')
-            getPokemonsDetails(data?.results)
-        } catch (error) {
-            console.log(error)
+        const getPokemons = async () => {
+            try {
+                const { data } = await api.get(`/pokemon?offset=${(currentPage - 1) * perPage}&limit=${perPage}`)
+                const totalPokemon = data.count
+                const calculatedTotalPages = Math.ceil(totalPokemon / perPage)
+                setTotalPages(calculatedTotalPages)
+                getPokemonsDetails(data?.results)
+            } catch (error) {
+                console.log(error)
+            }
         }
-    }
+        getPokemons()
+        console.log(currentPage)
+    }, [perPage, currentPage])
+
+
     const getPokemonsDetails = async (pokemons) => {
         if (pokemons.length === 0) return
         try {
@@ -27,7 +36,7 @@ const PokemonListProvider = ({ children }) => {
                 const { data } = await api.get(pokemon.url)
                 const newPokemon = {
                     ...data,
-                    price:  Math.floor(Math.random() * 1000) + 1,
+                    price: Math.floor(Math.random() * 1000) + 1,
                     quantity: 0,
                     total: 0,
 
@@ -41,15 +50,26 @@ const PokemonListProvider = ({ children }) => {
         }
     }
 
+    const getPokemonDetailObject = (id) => {
+        const pokemon = pokemons.find(pokemonIndex => pokemonIndex.id === id)
+        setPokemonObject(pokemon)
+    }
+
 
 
     return (
         <PokemonListContext.Provider
             value={{
                 // state
-                pokemons
+                pokemons,
+                pokemonObject,
+                totalPages,
+                currentPage,
+                perPage,
                 //metodos
-
+                getPokemonDetailObject,
+                setCurrentPage,
+                setPerPage,
 
 
             }}

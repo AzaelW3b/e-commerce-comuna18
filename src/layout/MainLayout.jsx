@@ -7,6 +7,7 @@ import LogoutIcon from '@mui/icons-material/Logout'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import LogoPokemon from '../components/logoPokemon'
 import Header from '../components/layout/Header'
+import Paginator from '../components/layout/Paginator'
 
 
 const MainLayout = () => {
@@ -113,10 +114,15 @@ const MainLayout = () => {
                             flexGrow: 1,
                             p: 3,
                             height: dynamicHeight,
+                            margin: "0 auto",
+                            maxWidth: "1200px",
+                            width: "95%"
                         }}
                     >
                         <Toolbar />
                         <Outlet />
+                        <Paginator />
+
                     </Box>
                 </>
 
