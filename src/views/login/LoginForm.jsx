@@ -15,9 +15,9 @@ import {
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import BackGround from '../../assets/bg.jpg'
-import Logo from '../../assets/logo.png'
 import useAuth from "../../hooks/useAuth"
 import ToastAlert from '../../components/ToastAlert'
+import LogoPokemon from '../../components/logoPokemon'
 
 const LoginForm = () => {
     const [checked, setChecked] = useState(false)
@@ -99,10 +99,8 @@ const LoginForm = () => {
                     <Box sx={{
                         marginBottom: "20px"
                     }}>
-                        <img
-                            style={{ width: "200px" }}
-                            src={Logo}
-                            alt="logo pokemon"
+                        <LogoPokemon
+                            size={"200px"}
                         />
                         <Typography sx={{ color: '#3F3F3F', fontSize: '28px', marginTop: "30px", fontWeight: "bold" }}>Inicia sesión</Typography>
                         <Typography sx={{ color: '#949494', fontSize: '16px' }}>Introduce tu correo y contraseña</Typography>

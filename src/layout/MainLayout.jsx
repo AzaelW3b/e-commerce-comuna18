@@ -1,130 +1,15 @@
-// import { useState, useEffect } from 'react'
-// import PropTypes from 'prop-types'
-// import AppBar from '@mui/material/AppBar'
-// import Box from '@mui/material/Box'
-// import CssBaseline from '@mui/material/CssBaseline'
-// import IconButton from '@mui/material/IconButton'
-// import MenuIcon from '@mui/icons-material/Menu'
-// import Toolbar from '@mui/material/Toolbar'
-// import Typography from '@mui/material/Typography'
-// 
-
-// const drawerWidth = 240
-
-// function MainLayout() {
-//    
-
-
-
-
-
-
-
-
-//     if (cargando) return ''
-
-
-//     return (
-//         <>
-//             {
-//                 usuario?.id ? (
-//                     <Box sx={{ display: 'flex' }}>
-//                         <CssBaseline />
-//                         <AppBar
-//                             position='fixed'
-//                             sx={{
-//                                 backgroundColor: 'colores.gris',
-//                                 boxShadow: 'unset',
-//                                 borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
-//                                 width: { sm: `calc(100% - ${drawerWidth}px)` },
-//                                 ml: { sm: `${drawerWidth}px` },
-//                             }}
-//                         >
-//                             <Toolbar sx={{ justifyContent: { sm: 'space-between', md: 'flex-end' }, marginRight: { sm: '0px', md: '30px' } }}>
-//                                 <IconButton
-//                                     color='inherit'
-//                                     aria-label='open drawer'
-//                                     edge='start'
-//                                     onClick={handleDrawerToggle}
-//                                     sx={{ mr: 2, display: { sm: 'block', md: 'none', color: '#000' } }}
-//                                 >
-//                                     <MenuIcon />
-//                                 </IconButton>
-//                                 <Box sx={{
-//                                     ':hover': 'none'
-//                                 }}>
-//                                     <IconButton
-//                                         sx={{ '&:hover': { backgroundColor: 'transparent' } }}
-//                                         onClick={handleMenuOpen}>
-//                                         <AccountCircleOutlinedIcon />
-//                                         <Typography sx={{ marginLeft: '5px' }}>Perfil</Typography>
-//                                         <ArrowDropDownIcon />
-//                                     </IconButton>
-//                                     <Menu
-//                                         anchorEl={anchorEl}
-//                                         open={Boolean(anchorEl)}
-//                                         onClose={handleMenuClose}
-//                                     >
-//                                         <MenuItem onClick={handleMenuClose}>
-//                                             <Box>
-//                                                 <Box>
-//                                                     <Typography sx={{ fontWeight: 'bold' }}>{`${usuario?.name} ${usuario?.lastName}`}</Typography>
-
-//                                                     <Typography sx={{ fontSize: 14 }} color='text.secondary' gutterBottom>
-//                                                         {usuario?.position?.description}
-//                                                     </Typography>
-
-//                                                     <Typography sx={{ fontSize: 14 }} gutterBottom>
-//                                                         {usuario?.email}
-//                                                     </Typography>
-//                                                     <Divider />
-//                                                     <IconButton
-//                                                         sx={{ '&:hover': { backgroundColor: 'transparent' } }}
-//                                                         onClick={() => cerrarSesion()}>
-//                                                         <LogoutIcon />
-//                                                         <Typography sx={{ marginLeft: '5px', }}>Cerrar sesión</Typography>
-//                                                     </IconButton>
-//                                                 </Box>
-//                                             </Box>
-//                                         </MenuItem>
-
-//                                     </Menu>
-//                                 </Box>
-//                             </Toolbar>
-//                         </AppBar>
-//                        
-//                     </Box>
-//                 ) : 
-//             }
-//         </>
-
-//     )
-// }
-
-// MainLayout.propTypes = {
-//     window: PropTypes.func,
-// }
-
-// export default MainLayout
-
+import { AppBar, Box, Toolbar, IconButton, Typography, Menu, MenuItem, Container, Button, Divider } from '@mui/material'
 import { useState, useEffect } from 'react'
-import AppBar from '@mui/material/AppBar'
-import Box from '@mui/material/Box'
-import Toolbar from '@mui/material/Toolbar'
-import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
-import Menu from '@mui/material/Menu'
-import MenuIcon from '@mui/icons-material/Menu'
-import Container from '@mui/material/Container'
-import Button from '@mui/material/Button'
-import MenuItem from '@mui/material/MenuItem'
-import AdbIcon from '@mui/icons-material/Adb'
 import useAuth from '../hooks/useAuth'
 import { Outlet, Navigate } from 'react-router-dom'
-import { Divider } from '@mui/material'
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined'
 import LogoutIcon from '@mui/icons-material/Logout'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
+import MenuIcon from '@mui/icons-material/Menu'
+import AdbIcon from '@mui/icons-material/Adb'
+import LogoPokemon from '../components/logoPokemon'
+import Header from '../components/layout/Header'
+
 const pages = ['Products', 'Pricing', 'Blog']
 
 const MainLayout = () => {
@@ -133,7 +18,6 @@ const MainLayout = () => {
     const [mobileOpen, setMobileOpen] = useState(false)
     const [anchorEl, setAnchorEl] = useState(null)
     const { usuario, cerrarSesion, cargando } = useAuth()
-
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget)
@@ -160,7 +44,6 @@ const MainLayout = () => {
     const handleResize = () => {
         const windowHeight = window.innerHeight
         const calculatedHeight = windowHeight > 600 ? '100vh' : 'auto'
-
         setDynamicHeight(calculatedHeight)
     }
 
@@ -189,25 +72,9 @@ const MainLayout = () => {
                         }}>
                         <Container maxWidth="xl">
                             <Toolbar disableGutters>
-                                <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-                                <Typography
-                                    variant="h6"
-                                    noWrap
-                                    component="a"
-                                    href="#app-bar-with-responsive-menu"
-                                    sx={{
-                                        mr: 2,
-                                        display: { xs: 'none', md: 'flex' },
-                                        fontFamily: 'monospace',
-                                        fontWeight: 700,
-                                        letterSpacing: '.3rem',
-                                        color: 'inherit',
-                                        textDecoration: 'none',
-                                    }}
-                                >
-                                    LOGO
-                                </Typography>
-
+                                <LogoPokemon
+                                    size={"120px"}
+                                />
                                 <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                                     <IconButton
                                         size="large"
@@ -331,6 +198,7 @@ const MainLayout = () => {
                             </Toolbar>
                         </Container>
                     </AppBar>
+                    <Header/>
                     <Box
                         component='main'
                         sx={{
