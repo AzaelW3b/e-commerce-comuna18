@@ -8,12 +8,15 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import LogoPokemon from '../components/logoPokemon'
 import Header from '../components/layout/Header'
 import Paginator from '../components/layout/Paginator'
+import usePokemonList from '../hooks/usePokemonList'
 
 
 const MainLayout = () => {
     const [dynamicHeight, setDynamicHeight] = useState('100vh')
     const [anchorEl, setAnchorEl] = useState(null)
     const { usuario, cerrarSesion, cargando } = useAuth()
+
+    const { loadingPokemons } = usePokemonList()
 
     const handleMenuClose = () => {
         setAnchorEl(null)
@@ -107,23 +110,26 @@ const MainLayout = () => {
                         </Container>
                     </AppBar>
                     <Header />
-                    <Box
-                        component='main'
-                        sx={{
-                            backgroundColor: 'colores.gris',
-                            flexGrow: 1,
-                            p: 3,
-                            height: dynamicHeight,
-                            margin: "0 auto",
-                            maxWidth: "1200px",
-                            width: "95%"
-                        }}
-                    >
-                        <Toolbar />
-                        <Outlet />
-                        <Paginator />
+                    {loadingPokemons ? 'cargando ...' : (
+                        <Box
+                            component='main'
+                            sx={{
+                                backgroundColor: 'colores.gris',
+                                flexGrow: 1,
+                                p: 3,
+                                height: dynamicHeight,
+                                margin: "0 auto",
+                                maxWidth: "1200px",
+                                width: "95%"
+                            }}
+                        >
+                            <Toolbar />
+                            <Outlet />
+                            <Paginator />
 
-                    </Box>
+                        </Box>
+                    )}
+
                 </>
 
             ) : <Navigate to='/' />}

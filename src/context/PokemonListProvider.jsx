@@ -10,11 +10,14 @@ const PokemonListProvider = ({ children }) => {
     const [currentPage, setCurrentPage] = useState(1)
     const [perPage, setPerPage] = useState(20)
     const [totalPages, setTotalPages] = useState(1)
+    const [loadingPokemons, setLoading] = useState(false)
 
     useEffect(() => {
         const getPokemons = async () => {
             try {
+                setLoading(true)
                 const { data } = await api.get(`/pokemon?offset=${(currentPage - 1) * perPage}&limit=${perPage}`)
+                setLoading(false)
                 const totalPokemon = data.count
                 const calculatedTotalPages = Math.ceil(totalPokemon / perPage)
                 setTotalPages(calculatedTotalPages)
@@ -66,6 +69,7 @@ const PokemonListProvider = ({ children }) => {
                 totalPages,
                 currentPage,
                 perPage,
+                loadingPokemons,
                 //metodos
                 getPokemonDetailObject,
                 setCurrentPage,
