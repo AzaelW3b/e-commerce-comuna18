@@ -10,7 +10,7 @@ import {
     Step,
     StepLabel
 } from "@mui/material"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { formatCurrency } from "../../helpers/formatCurrency"
 import ShoppingCartDetail from './ShoppingCartDetail'
 import useShoppingCart from '../../hooks/useShoppingCart'
@@ -22,8 +22,10 @@ const ShoppingCartView = ({ setOpen, open }) => {
     const steps = ['Carrito de compras', 'Dirección de entrega', 'Datos de tarjeta']
 
     const { shoppingCart, setShoppingCart } = useShoppingCart()
-
+    const [disabled, setDisabled] = useState(false)
+    const [disabledCard, setDisabledCard] = useState(false)
     const [errorsAddress, setErrorsAddress] = useState({})
+    const [errorsCardData, setErrorsCardData] = useState({})
     const [deliveryAddress, setDeliveryAddress] = useState({
         name: "",
         postalCode: "",
@@ -50,9 +52,47 @@ const ShoppingCartView = ({ setOpen, open }) => {
 
     const sumTotal = () => shoppingCart.reduce((sum, productoIndex) => productoIndex.total + sum, 0)
 
-
     const [activeStep, setActiveStep] = useState(0)
     const [skipped, setSkipped] = useState(new Set())
+
+    useEffect(() => {
+        if (activeStep + 1 === 2) {
+            if (
+                deliveryAddress?.name?.trim() === '' ||
+                deliveryAddress?.postalCode?.trim() === '' ||
+                deliveryAddress?.state?.trim() === '' ||
+                deliveryAddress?.municipality?.trim() === '' ||
+                deliveryAddress?.street?.trim() === '' ||
+                deliveryAddress?.outdoorNumber?.trim() === '' ||
+                deliveryAddress?.email?.trim() === '' ||
+                deliveryAddress?.phone?.trim() === ''
+            ) {
+
+                setDisabled(true)
+            } else {
+                setDisabled(false)
+
+            }
+        }
+    }, [activeStep, deliveryAddress?.name, deliveryAddress?.postalCode,
+        deliveryAddress?.state, deliveryAddress?.municipality, deliveryAddress?.street,
+        deliveryAddress?.outdoorNumber, deliveryAddress?.email, deliveryAddress?.phone])
+
+    useEffect(() => {
+        if (activeStep + 1 === 3) {
+            if (
+                cardData?.cardNumber?.trim() === '' ||
+                cardData?.fullName?.trim() === '' ||
+                cardData?.expirationDate?.trim() === '' ||
+                cardData?.securityCode?.trim() === ''
+            ) {
+                setDisabledCard(true)
+            } else {
+                setDisabledCard(false)
+
+            }
+        }
+    }, [activeStep, cardData?.cardNumber, cardData?.fullName, cardData?.expirationDate, cardData?.securityCode])
 
 
     const isStepSkipped = (step) => {
@@ -60,30 +100,7 @@ const ShoppingCartView = ({ setOpen, open }) => {
     }
 
     const handleNext = async () => {
-        if (activeStep + 1 === 2) {
-            if (
-                deliveryAddress?.name?.trim() === '' &&
-                deliveryAddress?.postalCode?.trim() === '' &&
-                deliveryAddress?.state?.trim() === '' &&
-                deliveryAddress?.municipality?.trim() === '' &&
-                deliveryAddress?.street?.trim() === '' &&
-                deliveryAddress?.outdoorNumber?.trim() === '' &&
-                deliveryAddress?.email?.trim() === '' &&
-                deliveryAddress?.phone?.trim() === ''
-            )
-                setErrorsAddress({
-                    name: "Debes ingresa el nombre",
-                    postalCode: "Debes ingresar el código postal",
-                    state: "Debes ingresar el estado",
-                    municipality: "Debes ingresar el municipio",
-                    colony: "Debes ingresar la colonia",
-                    street: "Debes ingresar la calle",
-                    outdoorNumber: "Debes ingresar el número exterior",
-                    email: "Debes ingresar el correo",
-                    phone: "Debes ingresar el teléfono",
-                })
-            return
-        }
+
         let newSkipped = skipped
         if (isStepSkipped(activeStep)) {
             newSkipped = new Set(newSkipped.values())
@@ -230,6 +247,8 @@ const ShoppingCartView = ({ setOpen, open }) => {
                                 <ShoppingCartCardData
                                     cardData={cardData}
                                     onChangeCardData={onChangeCardData}
+                                    errorsCardData={errorsCardData}
+                                    setErrorsCardData={setErrorsCardData}
                                 />
                             )}
                             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
@@ -247,6 +266,7 @@ const ShoppingCartView = ({ setOpen, open }) => {
                                     sx={{
                                         fontSize: "15px"
                                     }}
+                                    disabled={(activeStep + 1 === 2) && disabled || (activeStep + 1 === 3) && disabledCard}
                                     onClick={handleNext}>
                                     {activeStep === steps.length - 1 ? 'Finalizar' : 'Siguiente'}
                                 </Button>

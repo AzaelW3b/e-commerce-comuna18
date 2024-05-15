@@ -99,7 +99,7 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress,
                     fontSize: "20px",
                     color: "#000",
                 }}>
-                    Nombre completo
+                    Nombre completo*
                 </InputLabel>
 
                 <OutlinedInput
@@ -111,7 +111,7 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress,
                     }}
                     placeholder="Ingresa el nombre completo"
                     value={name}
-                    error={errorsAddress?.name ? "true" : undefined}
+                    error={errorsAddress?.name ? true : false}
                     onChange={(e) => handleBlurChange(e)}
                 />
                 {errorsAddress.name && (
@@ -132,7 +132,7 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress,
                     fontSize: "20px",
                     color: "#000",
                 }}>
-                    Código postal
+                    Código postal*
                 </InputLabel>
 
                 <OutlinedInput
@@ -144,7 +144,7 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress,
                     }}
                     placeholder="Ingresa el código"
                     value={postalCode}
-                    error={errorsAddress?.postalCode ? "true" : undefined}
+                    error={errorsAddress?.postalCode ? true : false}
                     onChange={(e) => handleBlurChange(e)}
                 />
                 {errorsAddress.postalCode && (
@@ -165,7 +165,7 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress,
                     fontSize: "20px",
                     color: "#000",
                 }}>
-                    Estado
+                    Estado*
                 </InputLabel>
 
                 <OutlinedInput
@@ -178,7 +178,7 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress,
                     placeholder="Ingresa el state"
                     value={state}
                     onChange={(e) => handleBlurChange(e)}
-                    error={errorsAddress?.state ? "true" : undefined}
+                    error={errorsAddress?.state ? true : false}
 
                 />
                 {errorsAddress.state && (
@@ -199,7 +199,7 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress,
                     fontSize: "20px",
                     color: "#000",
                 }}>
-                    Municipio
+                    Municipio*
                 </InputLabel>
 
                 <OutlinedInput
@@ -212,7 +212,7 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress,
                     placeholder="Ingresa el municipio"
                     value={municipality}
                     onChange={(e) => handleBlurChange(e)}
-                    error={errorsAddress?.municipality ? "true" : undefined}
+                    error={errorsAddress?.municipality ? true : false}
 
                 />
                 {errorsAddress.municipality && (
@@ -233,7 +233,7 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress,
                     fontSize: "20px",
                     color: "#000",
                 }}>
-                    Colonia
+                    Colonia*
                 </InputLabel>
 
                 <OutlinedInput
@@ -246,7 +246,7 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress,
                     placeholder="Ingresa la región"
                     value={colony}
                     onChange={(e) => handleBlurChange(e)}
-                    error={errorsAddress?.colony ? "true" : undefined}
+                    error={errorsAddress?.colony ? true : false}
 
                 />
                 {errorsAddress.colony && (
@@ -266,7 +266,7 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress,
                     fontSize: "20px",
                     color: "#000",
                 }}>
-                    Calle
+                    Calle*
                 </InputLabel>
 
                 <OutlinedInput
@@ -279,7 +279,7 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress,
                     placeholder="Ingresa la calle"
                     value={street}
                     onChange={(e) => handleBlurChange(e)}
-                    error={errorsAddress?.street ? "true" : undefined}
+                    error={errorsAddress?.street ? true : false}
 
                 />
                 {errorsAddress.street && (
@@ -299,7 +299,7 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress,
                     fontSize: "20px",
                     color: "#000",
                 }}>
-                    Número exterior
+                    Número exterior*
                 </InputLabel>
 
                 <OutlinedInput
@@ -312,7 +312,7 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress,
                     placeholder="Ingresa el número exterior"
                     value={outdoorNumber}
                     onChange={(e) => handleBlurChange(e)}
-                    error={errorsAddress?.street ? "true" : undefined}
+                    error={errorsAddress?.street ? true : false}
                 />
                 {errorsAddress.outdoorNumber && (
                     <Typography variant="caption" color="error">
@@ -358,7 +358,7 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress,
                     fontSize: "20px",
                     color: "#000",
                 }}>
-                    Correo
+                    Correo*
                 </InputLabel>
 
                 <OutlinedInput
@@ -371,7 +371,7 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress,
                     placeholder="Ingresa el email"
                     value={email}
                     onChange={(e) => handleBlurChange(e)}
-                    error={errorsAddress?.email ? "true" : undefined}
+                    error={errorsAddress?.email ? true: false}
 
                 />
                 {errorsAddress.email && (
@@ -392,7 +392,7 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress,
                     fontSize: "20px",
                     color: "#000",
                 }}>
-                    Télefono de contacto
+                    Télefono de contacto*
                 </InputLabel>
                 <OutlinedInput
                     name="phone"
@@ -404,7 +404,7 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress,
                     placeholder="Ingresa el télefono"
                     value={phone}
                     onChange={(e) => handleBlurChange(e)}
-                    error={errorsAddress?.phone ? "true" : undefined}
+                    error={errorsAddress?.phone ? true : false}
 
                 />
                 {errorsAddress.phone && (
