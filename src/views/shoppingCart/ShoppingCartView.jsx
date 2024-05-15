@@ -167,7 +167,6 @@ const ShoppingCartView = ({ setOpen, open }) => {
 
     const onChangeCardData = (e) => {
         setCardData({ ...cardData, [e.target.name]: e.target.value })
-        console.log(cardData)
     }
     return (
         <Dialog

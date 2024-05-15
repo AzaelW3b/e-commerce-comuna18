@@ -33,7 +33,6 @@ const LoginForm = () => {
     useEffect(() => {
         const usuarioRecordado = localStorage.getItem('usuarioRecordado')
         const usuarioRecordadoFlag = Boolean(localStorage.getItem('recordarUsuario'))
-        console.log(usuarioRecordadoFlag)
         if (!usuarioRecordadoFlag) return
         setAuth(JSON.parse(usuarioRecordado))
         setChecked(usuarioRecordadoFlag)

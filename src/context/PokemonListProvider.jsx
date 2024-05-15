@@ -27,7 +27,6 @@ const PokemonListProvider = ({ children }) => {
             }
         }
         getPokemons()
-        console.log(currentPage)
     }, [perPage, currentPage])
 
 
@@ -46,7 +45,6 @@ const PokemonListProvider = ({ children }) => {
                 }
                 resultsPokemonsDetails = [...resultsPokemonsDetails, newPokemon]
             }
-            console.log(resultsPokemonsDetails)
             setPokemons(resultsPokemonsDetails)
         } catch (error) {
             console.log(error)

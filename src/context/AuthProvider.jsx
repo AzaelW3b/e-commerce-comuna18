@@ -27,7 +27,6 @@ const AuthProvider = ({ children }) => {
 
     const iniciarSesion = (auth) => {
         const usuarioExiste = users.find(user => user.password === auth.password && user.email === auth.email)
-        console.log(usuarioExiste)
         if (usuarioExiste) {
             setCargando(false)
             setErrorAuth(false)

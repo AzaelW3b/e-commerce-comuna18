@@ -8,7 +8,6 @@ const Paginator = () => {
 
     const nextPage = () => {
         setCurrentPage(currentPage + 1)
-        console.log(currentPage)
     }
 
     const prevPage = () => {
