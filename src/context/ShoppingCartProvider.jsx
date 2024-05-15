@@ -1,6 +1,5 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useState } from 'react'
 import PropTypes from 'prop-types'
-import { useNavigate } from 'react-router-dom'
 
 const ShoppingCartContext = createContext()
 
@@ -19,11 +18,6 @@ const ShoppingCartProvider = ({ children }) => {
         pokemon.total = pokemon.price
         setShoppingCart([...shoppingCart, pokemon])
     }
-
-
-
-
-
 
     return (
         <ShoppingCartContext.Provider

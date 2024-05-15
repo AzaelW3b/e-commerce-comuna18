@@ -1,9 +1,85 @@
 import PropTypes from 'prop-types'
-import { Box, FormControl, InputLabel, OutlinedInput} from '@mui/material'
+import { Box, FormControl, InputLabel, OutlinedInput, Typography } from '@mui/material'
 
-const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress}) => {
+const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress, errorsAddress, setErrorsAddress }) => {
 
     const { name, postalCode, state, municipality, colony, street, outdoorNumber, interiorNumber, email, phone } = deliveryAddress
+
+    const handleBlurChange = (e) => {
+        const { name, value } = e.target
+        let newErrors = { ...errorsAddress }
+        switch (name) {
+            case "name":
+                if (value.trim() === "") {
+                    newErrors = { ...newErrors, [name]: "Debes ingresa el nombre" }
+                } else {
+                    delete newErrors[name]
+                }
+                break
+            case "postalCode":
+                if (value.trim() === "") {
+                    newErrors = { ...newErrors, [name]: "Debes el código postal" }
+                } else {
+                    delete newErrors[name]
+                }
+                break
+            case "state":
+                if (value.trim() === "") {
+                    newErrors = { ...newErrors, [name]: "Debes ingresar el estado" }
+                } else {
+                    delete newErrors[name]
+                }
+                break
+            case "municipality":
+                if (value.trim() === "") {
+                    newErrors = { ...newErrors, [name]: "Debes ingresar el municipio" }
+                } else {
+                    delete newErrors[name]
+                }
+                break
+            case "colony":
+                if (value.trim() === "") {
+                    newErrors = { ...newErrors, [name]: "Debes ingresar la colonia" }
+                } else {
+                    delete newErrors[name]
+                }
+                break
+            case "street":
+                if (value.trim() === "") {
+                    newErrors = { ...newErrors, [name]: "Debes ingresar la calle" }
+                } else {
+                    delete newErrors[name]
+                }
+                break
+            case "outdoorNumber":
+                if (value.trim() === "") {
+                    newErrors = { ...newErrors, [name]: "Debes ingresar el número exterior" }
+                } else {
+                    delete newErrors[name]
+                }
+                break
+            case "email":
+                if (value.trim() === "") {
+                    newErrors = { ...newErrors, [name]: "Debes ingresar el correo" }
+                } else {
+                    delete newErrors[name]
+                }
+                break
+            case "phone":
+                if (value.trim() === "") {
+                    newErrors = { ...newErrors, [name]: "Debes ingresare el télefono" }
+                } else {
+                    delete newErrors[name]
+                }
+                break
+            default:
+                delete newErrors[name]
+                break
+        }
+
+        setErrorsAddress(newErrors)
+        onChangeDeliveryAddress(e)
+    }
 
     return (
 
@@ -35,8 +111,14 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress}
                     }}
                     placeholder="Ingresa el nombre completo"
                     value={name}
-                    onChange={(e) => onChangeDeliveryAddress(e)}
+                    error={errorsAddress?.name ? "true" : undefined}
+                    onChange={(e) => handleBlurChange(e)}
                 />
+                {errorsAddress.name && (
+                    <Typography variant="caption" color="error">
+                        {errorsAddress.name}
+                    </Typography>
+                )}
 
             </FormControl>
 
@@ -62,9 +144,14 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress}
                     }}
                     placeholder="Ingresa el código"
                     value={postalCode}
-                    onChange={(e) => onChangeDeliveryAddress(e)}
+                    error={errorsAddress?.postalCode ? "true" : undefined}
+                    onChange={(e) => handleBlurChange(e)}
                 />
-
+                {errorsAddress.postalCode && (
+                    <Typography variant="caption" color="error">
+                        {errorsAddress.postalCode}
+                    </Typography>
+                )}
             </FormControl>
 
 
@@ -90,8 +177,15 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress}
                     }}
                     placeholder="Ingresa el state"
                     value={state}
-                    onChange={(e) => onChangeDeliveryAddress(e)}
+                    onChange={(e) => handleBlurChange(e)}
+                    error={errorsAddress?.state ? "true" : undefined}
+
                 />
+                {errorsAddress.state && (
+                    <Typography variant="caption" color="error">
+                        {errorsAddress.state}
+                    </Typography>
+                )}
 
             </FormControl>
 
@@ -117,9 +211,15 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress}
                     }}
                     placeholder="Ingresa el municipio"
                     value={municipality}
-                    onChange={(e) => onChangeDeliveryAddress(e)}
-                />
+                    onChange={(e) => handleBlurChange(e)}
+                    error={errorsAddress?.municipality ? "true" : undefined}
 
+                />
+                {errorsAddress.municipality && (
+                    <Typography variant="caption" color="error">
+                        {errorsAddress.municipality}
+                    </Typography>
+                )}
             </FormControl>
 
 
@@ -145,9 +245,15 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress}
                     }}
                     placeholder="Ingresa la región"
                     value={colony}
-                    onChange={(e) => onChangeDeliveryAddress(e)}
-                />
+                    onChange={(e) => handleBlurChange(e)}
+                    error={errorsAddress?.colony ? "true" : undefined}
 
+                />
+                {errorsAddress.colony && (
+                    <Typography variant="caption" color="error">
+                        {errorsAddress.colony}
+                    </Typography>
+                )}
             </FormControl>
 
             <FormControl
@@ -170,11 +276,17 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress}
                         marginBottom: "30px",
                         fontSize: "14px"
                     }}
-                    placeholder="Ingresa la street"
+                    placeholder="Ingresa la calle"
                     value={street}
-                    onChange={(e) => onChangeDeliveryAddress(e)}
-                />
+                    onChange={(e) => handleBlurChange(e)}
+                    error={errorsAddress?.street ? "true" : undefined}
 
+                />
+                {errorsAddress.street && (
+                    <Typography variant="caption" color="error">
+                        {errorsAddress.street}
+                    </Typography>
+                )}
             </FormControl>
 
             <FormControl
@@ -199,9 +311,14 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress}
                     }}
                     placeholder="Ingresa el número exterior"
                     value={outdoorNumber}
-                    onChange={(e) => onChangeDeliveryAddress(e)}
+                    onChange={(e) => handleBlurChange(e)}
+                    error={errorsAddress?.street ? "true" : undefined}
                 />
-
+                {errorsAddress.outdoorNumber && (
+                    <Typography variant="caption" color="error">
+                        {errorsAddress.outdoorNumber}
+                    </Typography>
+                )}
             </FormControl>
 
             <FormControl
@@ -226,7 +343,7 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress}
                     }}
                     placeholder="Ingresa el número interior"
                     value={interiorNumber}
-                    onChange={(e) => onChangeDeliveryAddress(e)}
+                    onChange={(e) => handleBlurChange(e)}
                 />
 
             </FormControl>
@@ -253,9 +370,15 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress}
                     }}
                     placeholder="Ingresa el email"
                     value={email}
-                    onChange={(e) => onChangeDeliveryAddress(e)}
-                />
+                    onChange={(e) => handleBlurChange(e)}
+                    error={errorsAddress?.email ? "true" : undefined}
 
+                />
+                {errorsAddress.email && (
+                    <Typography variant="caption" color="error">
+                        {errorsAddress.email}
+                    </Typography>
+                )}
             </FormControl>
 
 
@@ -271,7 +394,6 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress}
                 }}>
                     Télefono de contacto
                 </InputLabel>
-
                 <OutlinedInput
                     name="phone"
                     sx={{
@@ -281,9 +403,15 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress}
                     }}
                     placeholder="Ingresa el télefono"
                     value={phone}
-                    onChange={(e) => onChangeDeliveryAddress(e)}
-                />
+                    onChange={(e) => handleBlurChange(e)}
+                    error={errorsAddress?.phone ? "true" : undefined}
 
+                />
+                {errorsAddress.phone && (
+                    <Typography variant="caption" color="error">
+                        {errorsAddress.phone}
+                    </Typography>
+                )}
             </FormControl>
 
         </Box>
@@ -292,6 +420,8 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress}
 ShoppingCartDeliveryAddress.propTypes = {
     deliveryAddress: PropTypes.object.isRequired,
     onChangeDeliveryAddress: PropTypes.func.isRequired,
+    errorsAddress: PropTypes.object.isRequired,
+    setErrorsAddress: PropTypes.func.isRequired,
 
 }
 export default ShoppingCartDeliveryAddress

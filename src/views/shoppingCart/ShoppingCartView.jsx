@@ -23,6 +23,7 @@ const ShoppingCartView = ({ setOpen, open }) => {
 
     const { shoppingCart, setShoppingCart } = useShoppingCart()
 
+    const [errorsAddress, setErrorsAddress] = useState({})
     const [deliveryAddress, setDeliveryAddress] = useState({
         name: "",
         postalCode: "",
@@ -59,9 +60,29 @@ const ShoppingCartView = ({ setOpen, open }) => {
     }
 
     const handleNext = async () => {
-        if (activeStep + 1 === 3) {
-
-           console.log('aquí')
+        if (activeStep + 1 === 2) {
+            if (
+                deliveryAddress?.name?.trim() === '' &&
+                deliveryAddress?.postalCode?.trim() === '' &&
+                deliveryAddress?.state?.trim() === '' &&
+                deliveryAddress?.municipality?.trim() === '' &&
+                deliveryAddress?.street?.trim() === '' &&
+                deliveryAddress?.outdoorNumber?.trim() === '' &&
+                deliveryAddress?.email?.trim() === '' &&
+                deliveryAddress?.phone?.trim() === ''
+            )
+                setErrorsAddress({
+                    name: "Debes ingresa el nombre",
+                    postalCode: "Debes ingresar el código postal",
+                    state: "Debes ingresar el estado",
+                    municipality: "Debes ingresar el municipio",
+                    colony: "Debes ingresar la colonia",
+                    street: "Debes ingresar la calle",
+                    outdoorNumber: "Debes ingresar el número exterior",
+                    email: "Debes ingresar el correo",
+                    phone: "Debes ingresar el teléfono",
+                })
+            return
         }
         let newSkipped = skipped
         if (isStepSkipped(activeStep)) {
@@ -200,6 +221,8 @@ const ShoppingCartView = ({ setOpen, open }) => {
                                 <ShoppingCartDeliveryAddress
                                     deliveryAddress={deliveryAddress}
                                     onChangeDeliveryAddress={onChangeDeliveryAddress}
+                                    errorsAddress={errorsAddress}
+                                    setErrorsAddress={setErrorsAddress}
                                 />
                             )}
 
