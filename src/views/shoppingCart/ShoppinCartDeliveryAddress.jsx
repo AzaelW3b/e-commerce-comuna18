@@ -60,9 +60,9 @@ const ShoppingCartDeliveryAddress = ({ deliveryAddress, onChangeDeliveryAddress,
                 break
             case "email":
                 if (value.trim() === "") {
-                    newErrors = { ...newErrors, [name]: "Debes ingresar el correo" };
+                    newErrors = { ...newErrors, [name]: "Debes ingresar el correo" }
                 } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-                    newErrors = { ...newErrors, [name]: "Debes ingresar un correo electrónico válido" };
+                    newErrors = { ...newErrors, [name]: "Debes ingresar un correo electrónico válido" }
                 } else {
                     delete newErrors[name];
                 }

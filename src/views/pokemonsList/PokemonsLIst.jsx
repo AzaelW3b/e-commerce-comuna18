@@ -24,7 +24,7 @@ const PokemonsList = () => {
         <Box sx={{ margin: "0 auto", maxWidth: "1200px", width: "95%" }}>
             <Box sx={{
                 display: "grid",
-                gridTemplateColumns: "repeat(3,1fr)",
+                gridTemplateColumns:{ xs: "repeat(1,1fr)", md: "repeat(3,1fr)" },
                 gap: "20px"
             }}>
                 {

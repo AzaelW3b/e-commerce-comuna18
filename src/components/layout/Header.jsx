@@ -31,7 +31,7 @@ const Header = () => {
             }}>
             <Box component="div"
                 sx={{
-                    height: "83.5%",
+                    height: { xs: "89.3%", md: "83.5%" },
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-around",
@@ -48,12 +48,13 @@ const Header = () => {
                 <Typography
                     variant="h1"
                     sx={{
-                        fontSize: "60px",
+                        fontSize: { xs: "40px", md: "60px" },
                         color: "colors.white",
                         fontWeight: "bold",
-                        marginLeft: "30px",
+                        marginLeft: { xs: "0", md: "30px" },
                         marginTop: "60px",
-                        width: "40%"
+                        textAlign: { xs: "center", md: "left" },
+                        width: { xs: "100%", md: "40%" }
                     }}>
                     Encuentra al pokémon que  vaya más contigo.
                 </Typography>
@@ -61,12 +62,16 @@ const Header = () => {
                 <Box sx={{
                     color: "colors.white",
                     marginLeft: "30px",
-                    display: "grid",
+                    display: { xs: "block", md: "grid" },
                     gridTemplateColumns: `repeat(${dataPokemon.length},1fr)`,
                 }}>
                     {
                         dataPokemon.map(data => (
-                            <Box key={data?.id}>
+                            <Box
+                                sx={{
+                                    textAlign: { xs: "center", md: "left" }
+                                }}
+                                key={data?.id}>
                                 <Typography variant="h2">
                                     {data.number}
                                 </Typography>
