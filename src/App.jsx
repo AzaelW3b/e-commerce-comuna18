@@ -3,6 +3,7 @@ import { createTheme } from "@mui/material"
 import { ThemeProvider } from "@emotion/react"
 import { AuthProvider } from './context/AuthProvider'
 import { PokemonListProvider } from './context/PokemonListProvider'
+import { ShoppingCartProvider } from './context/ShoppingCartProvider'
 import LoginForm from './views/login/LoginForm'
 import MainLayout from './layout/MainLayout'
 import PokemonsList from './views/pokemonsList/PokemonsLIst'
@@ -31,14 +32,16 @@ function App() {
       <Router>
         <AuthProvider>
           <PokemonListProvider>
-            <Routes>
-              <Route exact path="/" element={<LoginForm />} />
-              <Route path="/inicio" element={<MainLayout />}>
-                <Route index element={<PokemonsList />} />
-                {/* <Route path="alta-compania" element={<Registro />} /> */}
+            <ShoppingCartProvider>
+              <Routes>
+                <Route exact path="/" element={<LoginForm />} />
+                <Route path="/inicio" element={<MainLayout />}>
+                  <Route index element={<PokemonsList />} />
+                  {/* <Route path="alta-compania" element={<Registro />} /> */}
 
-              </Route>
-            </Routes>
+                </Route>
+              </Routes>
+            </ShoppingCartProvider>
           </PokemonListProvider>
         </AuthProvider>
       </Router>

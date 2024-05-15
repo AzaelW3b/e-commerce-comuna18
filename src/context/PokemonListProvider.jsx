@@ -27,7 +27,10 @@ const PokemonListProvider = ({ children }) => {
                 const { data } = await api.get(pokemon.url)
                 const newPokemon = {
                     ...data,
-                    price:  Math.floor(Math.random() * 1000) + 1
+                    price:  Math.floor(Math.random() * 1000) + 1,
+                    quantity: 0,
+                    total: 0,
+
                 }
                 resultsPokemonsDetails = [...resultsPokemonsDetails, newPokemon]
             }

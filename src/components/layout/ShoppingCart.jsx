@@ -1,7 +1,8 @@
 import { Box, Typography } from '@mui/material'
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-const ShoppingCart = () => {
-    // onClick={() => setOpen(true)}
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
+import useShoppingCart from '../../hooks/useShoppingCart'
+const ShoppingCart = ({ setOpen }) => {
+    const { shoppingCart } = useShoppingCart()
     return (
         <Box sx={{
             padding: "20px",
@@ -16,14 +17,15 @@ const ShoppingCart = () => {
             bottom: "9px",
             right: "26px",
             zIndex: "12",
-        }}>
+        }}
+            onClick={() => setOpen(true)}>
             <ShoppingCartIcon sx={{ fontSize: "50px", color: "colors.white" }} />
             <Typography sx={{
                 fontWeight: "bold",
                 marginLeft: "10px",
                 color: "colors.white"
 
-            }}>{[].length}</Typography>
+            }}>{shoppingCart?.length}</Typography>
         </Box>
     )
 }

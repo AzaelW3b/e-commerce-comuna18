@@ -9,22 +9,19 @@ import usePokemonsList from '../../hooks/usePokemonList'
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket'
 import { formatCurrency } from '../../helpers/formatCurrency'
 import ShoppingCart from '../../components/layout/ShoppingCart'
-const PokemonsList = () => {
-    const { pokemons } = usePokemonsList()
+import useShoppingCart from '../../hooks/useShoppingCart'
+import ShoppingCartView from '../shoppingCart/ShoppingCartView'
+import { useState } from 'react'
 
-    const addPokemonShoppingCart = (pokemon) => {
-        console.log(pokemon)
-        // const productoExiste = carrito.find(item => item._id === producto._id)
-        // if (productoExiste) {
-        //   productoExiste.cantidad = productoExiste.cantidad + 1
-        //   productoExiste.total = productoExiste.precio * productoExiste.cantidad
-        //   return
-        // }
-        // producto.cantidad = 1
-        // producto.total = producto.precio
+const PokemonsList = () => {
+    const [open, setOpen] = useState(false)
+    const { pokemons } = usePokemonsList()
+    const { addPokemonShoppingCart } = useShoppingCart()
+    const getPokemon = (pokemon) => {
+        addPokemonShoppingCart(pokemon)
     }
     return (
-        <>
+        <Box sx={{ margin: "0 auto", maxWidth: "1200px", width: "95%" }}>
             <Box sx={{
                 display: "grid",
                 gridTemplateColumns: "repeat(3,1fr)",
@@ -49,15 +46,22 @@ const PokemonsList = () => {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small" onClick={()=>addPokemonShoppingCart(pokemon)}><ShoppingBasketIcon /></Button>
+                                <Button size="small" onClick={() => getPokemon(pokemon)}><ShoppingBasketIcon /></Button>
                                 <Button size="small">Detalle del pokémon</Button>
                             </CardActions>
                         </Card>
                     ))
                 }
             </Box>
-            <ShoppingCart />
-        </>
+            <ShoppingCart
+                setOpen={setOpen}
+            />
+            <ShoppingCartView
+                setOpen={setOpen}
+                open={open}
+
+            />
+        </Box>
 
 
 
