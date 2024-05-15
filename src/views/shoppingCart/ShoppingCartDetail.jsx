@@ -7,7 +7,7 @@ const ShoppingCartDetail = ({ pokemon, increaseQuantity, decreaseQuantity }) => 
         <Box
             sx={{
                 display: "grid",
-                gridTemplateColumns: "repeat(5,1fr)"
+                gridTemplateColumns: { xs: "repeat(3,1fr)", md: "repeat(5,1fr)" }
             }}
             key={pokemon?.id}>
             <Box>

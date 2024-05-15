@@ -23,27 +23,34 @@ const Header = () => {
             component="header"
             sx={{
                 backgroundImage: `url(${Background})`,
-                height: "800px",
                 backgroundPosition: "center",
                 backgroundSize: "cover",
                 backgroundAttachment: "fixed",
-                overflow: "hidden"
+                overflow: "hidden",
+           
+                    position: 'relative',
+                    width: '100%',
+                    height: '800px',
+                    '&::before': {
+                        content: '""',
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                        zIndex: 1
+                    }
             }}>
             <Box component="div"
-                sx={{
-                    height: { xs: "89.3%", md: "83.5%" },
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-around",
-                    position: "absolute",
-                    content: "''",
-                    top: 0,
-                    left: 0,
-                    bottom: 0,
-                    right: 0,
-                    width: "100%",
-                    backgroundColor: "rgba(0, 0, 0, 0.5)"
-                }}
+                 sx={{
+                     height: { xs: "89.3%", md: "83.5%" },
+                     display: "flex",
+                     flexDirection: "column",
+                     position: "relative",
+                     justifyContent: "space-around",
+                    zIndex: 2
+                 }}
             >
                 <Typography
                     variant="h1"

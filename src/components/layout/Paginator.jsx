@@ -26,7 +26,7 @@ const Paginator = () => {
             <Box sx={{
                 padding: "20px",
                 display: "grid",
-                gridTemplateColumns: "10% 10% 10% 10%",
+                gridTemplateColumns: { xs: "repeat(1,1fr)", md:"10% 10% 10% 10%" } ,
                 gap: "20px",
                 marginTop: "20px",
                 justifyContent: "flex-end",
@@ -48,7 +48,7 @@ const Paginator = () => {
                 <Typography variant="body1" sx={{ mt: 3 }}>Página {currentPage} de {totalPages}</Typography>
 
                 <Button variant="contained" sx={{ width: "150px", height: "40px", mt: 2 }} onClick={prevPage} disabled={currentPage === 1}>Previous</Button>
-                <Button variant="contained" sx={{ width: "150px", height: "40px", marginLeft: 3, mt: 2 }} onClick={nextPage} disabled={currentPage === totalPages}>Next</Button>
+                <Button variant="contained" sx={{ width: "150px", height: "40px", marginLeft: { xs: 0, md:3 }, mt: 2 }} onClick={nextPage} disabled={currentPage === totalPages}>Next</Button>
             </Box>
 
     )

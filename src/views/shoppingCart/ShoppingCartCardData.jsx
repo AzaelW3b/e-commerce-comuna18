@@ -49,9 +49,11 @@ const ShoppingCartCardData = ({ cardData, onChangeCardData, errorsCardData, setE
     return (
         <Box
             component="form"
-            display="grid"
-            gridTemplateColumns="repeat(2,1fr)"
-            columnGap="10px"
+            sx={{
+                display: "grid",
+                gridTemplateColumns: { xs: "repeat(1,1fr)", md: "repeat(2,1fr)" },
+                columnGap: "10px"
+            }}
         >
             <FormControl
                 variant="standard"
